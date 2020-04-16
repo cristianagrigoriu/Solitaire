@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    internal static class PackOfCardsFactory
+    internal static class CardsFactory
     {
 
         public static IEnumerable<Card> GetShuffledCards()

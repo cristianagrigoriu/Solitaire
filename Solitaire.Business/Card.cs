@@ -12,7 +12,7 @@
 
         public CardNumber Number { get; }
 
-        public static Card JokerCard => new Card(0,0);
+        public static Card EmptyCard => new Card(0,0);
         
         public override string ToString()
         {

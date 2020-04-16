@@ -6,29 +6,24 @@ namespace Solitaire.Business
 {
     public class PackOfCards
     {
-        private List<Card> availableCards;
-        private List<Card> drawnCards = new List<Card>();
-        private static Random randomNumber = new Random();
+        private readonly List<Card> availableCards;
+        private readonly List<Card> drawnCards = new List<Card>();
 
         public PackOfCards()
         {
             availableCards = CardsFactory.GetShuffledCards().ToList();
         }
 
-        public Card DrawRandomCard()
+        public Card DrawNextCard()
         {
-            //ToDo generat random aici sau la nivel de clasa?
-            //return empty card when pack is null
-            if (this.availableCards == null || this.availableCards.Count == 0)
+            if (this.availableCards.Count == 0)
             {
-                return Card.JokerCard;
+                return Card.EmptyCard;
             }
 
-            int drawnCardPosition = new Random().Next(0, this.availableCards.Count);
+            var drawnCard = availableCards.First();
 
-            var drawnCard = availableCards[drawnCardPosition];
-
-            availableCards.RemoveAt(drawnCardPosition);
+            availableCards.RemoveAt(0);
             drawnCards.Add(drawnCard);
 
             return drawnCard;

@@ -8,14 +8,12 @@ namespace Solitaire
         static void Main(string[] args)
         {
             var packOfCards = new PackOfCards();
-            //PackOfCards.CreatePackOfCards();
-            //packOfCards.Shuffle();
 
             Card randomCard;
             for (int i = 0; i < 53; i++)
             {
-                randomCard = packOfCards.DrawRandomCard();
-                if (randomCard.IsJoker())
+                randomCard = packOfCards.DrawNextCard();
+                if (randomCard.IsEmptyCard())
                 {
                     Console.WriteLine("No cards available");
                 }
@@ -25,13 +23,7 @@ namespace Solitaire
                 }
             }
 
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    packOfCards.Shuffle();
-            //    Console.WriteLine(packOfCards);
-            //}
-
-                Console.ReadLine();
+            Console.ReadLine();
         }
     }
 }

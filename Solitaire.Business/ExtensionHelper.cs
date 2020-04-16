@@ -2,7 +2,7 @@
 {
     public static class ExtensionHelper
     {
-        public static bool IsJoker(this Card card)
+        public static bool IsEmptyCard(this Card card)
         {
             return card.Suit == 0 && card.Number == 0;
         }
