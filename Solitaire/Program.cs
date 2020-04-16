@@ -9,7 +9,7 @@ namespace Solitaire
         {
             var packOfCards = new PackOfCards();
             //PackOfCards.CreatePackOfCards();
-            packOfCards.Shuffle();
+            //packOfCards.Shuffle();
 
             Card randomCard;
             for (int i = 0; i < 53; i++)
