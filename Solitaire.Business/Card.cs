@@ -13,7 +13,20 @@
         public CardNumber Number { get; }
 
         public static Card EmptyCard => new Card(0,0);
-        
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != typeof(Card))
+            {
+                return false;
+            }
+
+            var cardToCompare = (Card)obj;
+
+            return cardToCompare.Number == this.Number
+                && cardToCompare.Suit == this.Suit;
+        }
+
         public override string ToString()
         {
             return $"{this.Number} of {this.Suit}";

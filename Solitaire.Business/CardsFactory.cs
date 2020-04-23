@@ -4,9 +4,8 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    internal static class CardsFactory
+    public static class CardsFactory
     {
-
         public static IEnumerable<Card> GetShuffledCards()
         {
             return CreateAllAvailableCards().Shuffle();
@@ -32,8 +31,7 @@
 
             while (availableCards.Any())
             {
-                //ToDo random -> count - 1?
-                var randomCardPosition = new Random().Next(availableCards.Count + 1);
+                var randomCardPosition = new Random().Next(availableCards.Count - 1);
 
                 yield return availableCards[randomCardPosition];
                 availableCards.RemoveAt(randomCardPosition);

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Solitaire.Business
@@ -31,7 +30,7 @@ namespace Solitaire.Business
 
         public override string ToString()
         {
-            return //string.Join("\n", this.availableCards)
+            return
             this.availableCards?
                 .Select((card, index) => $"{index + 1} {card}")
                 .Aggregate((a, b) => $"{a}\n{b}");
