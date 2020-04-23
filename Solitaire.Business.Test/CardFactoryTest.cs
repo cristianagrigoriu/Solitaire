@@ -12,6 +12,7 @@ namespace Solitaire.Business.Test
             var firstListOfCards = CardsFactory.GetShuffledCards().ToList();
             var secondListOfCards = CardsFactory.GetShuffledCards().ToList();
 
+            //ToDo add extension method for not in same order
             firstListOfCards.Should().BeEquivalentTo(secondListOfCards);
             //firstListOfCards.Should().BeEquivalentTo(secondListOfCards,
             //    options => options.WithStrictOrdering());

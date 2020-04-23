@@ -1,6 +1,6 @@
 ﻿namespace Solitaire.Business
 {
-    public static class ExtensionHelper
+    public static class CardExtensions
     {
         public static bool IsEmptyCard(this Card card)
         {

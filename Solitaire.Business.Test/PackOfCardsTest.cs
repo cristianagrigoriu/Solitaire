@@ -1,7 +1,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace Solitaire.Business.Test
 {
@@ -18,15 +18,7 @@ namespace Solitaire.Business.Test
         [Test]
         public void When_drawing_cards_Should_draw_52_different_cards()
         {
-            var drawnCards = new SortedList<Card, int>();
-
-            Action act = () =>
-            {
-                for (int i = 0; i < 52; i++)
-                {
-                    drawnCards.Add(this.packOfCards.DrawNextCard(), i);
-                }
-            };
+            Action act = () => this.packOfCards.DrawAllCards().ToDictionary(k => k.ToString());
 
             act.Should().NotThrow<ArgumentException>();
         }
@@ -35,10 +27,7 @@ namespace Solitaire.Business.Test
         [Test]
         public void When_drawing_card_from_empty_pack_Should_return_empty_card()
         {
-            for (int i = 0; i < 52; i++)
-            {
-                this.packOfCards.DrawNextCard();
-            }
+            this.packOfCards.DrawAllCards();
 
             var sut = this.packOfCards.DrawNextCard();
 
@@ -48,19 +37,10 @@ namespace Solitaire.Business.Test
         [Test]
         public void When_drawing_cards_Cards_should_be_random()
         {
+            var drawnCardsFromFirstPack = this.packOfCards.DrawNextCards(3);
+
             var secondPackOfCards = new PackOfCards();
-
-            var drawnCardsFromFirstPack = new List<Card>();
-            for (int i = 0; i < 3; i++)
-            {
-                drawnCardsFromFirstPack.Add(packOfCards.DrawNextCard());
-            }
-
-            var drawnCardsFromSecondPack = new List<Card>();
-            for (int i = 0; i < 3; i++)
-            {
-                drawnCardsFromSecondPack.Add(secondPackOfCards.DrawNextCard());
-            }
+            var drawnCardsFromSecondPack = secondPackOfCards.DrawNextCards(3);
 
             drawnCardsFromFirstPack.Should().NotIntersectWith(drawnCardsFromSecondPack);
         }
