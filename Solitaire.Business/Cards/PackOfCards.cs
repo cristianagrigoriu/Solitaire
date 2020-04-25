@@ -28,6 +28,11 @@ namespace Solitaire.Business
             return drawnCard;
         }
 
+        public int GetNumberOfAvailableCards()
+        {
+            return this.availableCards.Count();
+        }
+
         public override string ToString()
         {
             return

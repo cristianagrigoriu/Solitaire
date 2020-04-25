@@ -27,7 +27,7 @@ namespace Solitaire.Business.Test
         [Test]
         public void When_drawing_card_from_empty_pack_Should_return_empty_card()
         {
-            this.packOfCards.DrawAllCards();
+            this.packOfCards.DrawAllCards().ToList();
 
             var sut = this.packOfCards.DrawNextCard();
 
