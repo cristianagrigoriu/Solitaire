@@ -2,7 +2,7 @@
 
 namespace Solitaire.Business
 {
-    public class TableauPile
+    internal class TableauPile
     {
         public List<Card> Cards { get; set; } = new List<Card>();
     }

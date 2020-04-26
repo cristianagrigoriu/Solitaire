@@ -1,6 +1,6 @@
 ﻿namespace Solitaire.Business
 {
-    public class Stock
+    internal class Stock
     {
         public Stock(PackOfCards packOfCards)
         {

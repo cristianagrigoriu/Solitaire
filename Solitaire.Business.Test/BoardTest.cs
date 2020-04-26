@@ -3,6 +3,7 @@
 namespace Solitaire.Business.Test
 {
     using NUnit.Framework;
+    using Solitaire.Business.GameLogic;
 
     public class BoardTest
     {
@@ -11,7 +12,12 @@ namespace Solitaire.Business.Test
         [SetUp]
         public void Setup()
         {
-            board = new Board();
+            this.board = new BoardBuilder()
+                .WithPackOfCards()
+                .WithFoundationPiles()
+                .WithTableauPiles()
+                .WithStock()
+                .Build();
         }
 
         [Test]

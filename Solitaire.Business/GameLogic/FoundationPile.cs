@@ -2,7 +2,7 @@
 
 namespace Solitaire.Business
 {
-    public class FoundationPile
+    internal class FoundationPile
     {
         public FoundationPile(CardSuit cardSuit)
         {
