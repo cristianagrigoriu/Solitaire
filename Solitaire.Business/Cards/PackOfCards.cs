@@ -5,8 +5,7 @@ namespace Solitaire.Business
 {
     public class PackOfCards
     {
-        private readonly List<Card> availableCards;
-        private readonly List<Card> drawnCards = new List<Card>();
+        private List<Card> availableCards;
 
         public PackOfCards()
         {
@@ -23,9 +22,15 @@ namespace Solitaire.Business
             var drawnCard = availableCards.First();
 
             availableCards.RemoveAt(0);
-            drawnCards.Add(drawnCard);
 
             return drawnCard;
+        }
+
+        public List<Card> DrawAllRemainingCards()
+        {
+            var remainingCards = new List<Card>(this.availableCards);
+            this.availableCards = new List<Card>();
+            return remainingCards;
         }
 
         public int GetNumberOfAvailableCards()

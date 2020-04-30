@@ -2,16 +2,34 @@
 
 namespace Solitaire.Business
 {
+    using System.Runtime.InteropServices.ComTypes;
+
     internal class FoundationPile
     {
         public FoundationPile(CardSuit cardSuit)
         {
             this.Suit = cardSuit;
-            this.Cards = new List<Card>();
+            this.Cards = new Stack<Card>();
+        }
+
+        public bool CanAdd(Card card)
+        {
+            if (!this.Cards.TryPeek(out var topCard))
+            {
+                return card.Suit == this.Suit
+                       && card.Number == CardNumber.Ace;
+            }
+
+            return card.IsAfter(topCard);
         }
 
         public CardSuit Suit { get; }
 
-        public List<Card> Cards { get; }
+        public Stack<Card> Cards { get; }
+
+        public void Add(Card card)
+        {
+            this.Cards.Push(card);
+        }
     }
 }

@@ -1,12 +1,29 @@
 ﻿namespace Solitaire.Business
 {
+    using System.Collections.Generic;
+
     internal class Stock
     {
+        private Stack<Card> faceDownCards;
+        private Stack<Card> faceUpCards;
+
         public Stock(PackOfCards packOfCards)
         {
-            this.PackOfCards = packOfCards;
+            this.faceDownCards = new Stack<Card>(packOfCards.DrawAllRemainingCards());
         }
 
-        public PackOfCards PackOfCards { get; }
+        //ToDo stack/heap of cards
+        public void RevealTopCard()
+        {
+            var topCard = this.faceDownCards.Pop();
+            this.faceUpCards.Push(topCard);
+        }
+
+        public Card TopCard => this.faceUpCards.Peek();
+
+        public void RemoveTopCard()
+        {
+            this.faceUpCards.Pop();
+        }
     }
 }

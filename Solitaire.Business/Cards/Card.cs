@@ -31,5 +31,15 @@
         {
             return $"{this.Number} of {this.Suit}";
         }
+
+        public bool IsAfter(Card possibleNextCard)
+        {
+            if (this.Suit != possibleNextCard.Suit)
+            {
+                return false;
+            }
+
+            return this.Number == possibleNextCard.Number + 1;
+        }
     }
 }
