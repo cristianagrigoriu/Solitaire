@@ -2,7 +2,7 @@
 {
     internal class TableauPileBuilder
     {
-        private TableauPile tableauPile;
+        private readonly TableauPile tableauPile;
         private PackOfCards packOfCards;
         private int cardsInPile;
 
@@ -27,8 +27,10 @@
         {
             for (int i = 0; i < this.cardsInPile; i++)
             {
-                this.tableauPile.Cards.Add(this.packOfCards.DrawNextCard());
+                this.tableauPile.Cards.Push(this.packOfCards.DrawNextCard());
             }
+
+            this.tableauPile.RevealTopCard();
 
             return this.tableauPile;
         }

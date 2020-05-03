@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Solitaire.Business.Test")]
 namespace Solitaire.Business
 {
     using System.Linq;
@@ -15,8 +13,8 @@ namespace Solitaire.Business
         public void MoveCardFromStockToFoundationPile()
         {
             var cardFromStock = this.Stock.TopCard;
-            var possibleFoundationPile = this.FoundationPiles.First(x => x.Suit == cardFromStock.Suit);
 
+            var possibleFoundationPile = this.FoundationPiles.First(x => x.Suit == cardFromStock.Suit);
             if (possibleFoundationPile.CanAdd(cardFromStock))
             {
                 this.Stock.RemoveTopCard();
@@ -24,15 +22,23 @@ namespace Solitaire.Business
             }
         }
 
-        public void MoveSelectedCardToFoundationPile(Card selectedCard)
+        public void MoveCardFromTableauPileToFoundationPile(Card selectedCard, int tableauPileNumber)
         {
+            var tableauPile = this.TableauPiles[tableauPileNumber];
+            var card = tableauPile.TopCard;
 
+            var possibleFoundationPile = this.FoundationPiles.First(x => x.Suit == card.Suit);
+            if (possibleFoundationPile.CanAdd(card))
+            {
+                tableauPile.RemoveTopCard();
+                possibleFoundationPile.Add(card);
+            }
         }
 
-        public void MoveFromTableauPileToAnotherTableauPile(
+        public void MoveCardFromTableauPileToAnotherTableauPile(
             List<Card> selectedCards, 
-            TableauPile sourcePile, 
-            TableauPile destinationPile)
+            int sourcePile, 
+            int destinationPile)
         {
 
         }

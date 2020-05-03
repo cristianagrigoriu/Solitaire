@@ -17,19 +17,34 @@
 
         public BoardBuilder WithFoundationPiles()
         {
-            this.foundationPiles = SetupFoundationPiles();
+            this.foundationPiles = new[]
+            {
+                new FoundationPile(CardSuit.Diamonds),
+                new FoundationPile(CardSuit.Hearts),
+                new FoundationPile(CardSuit.Spades),
+                new FoundationPile(CardSuit.Clubs)
+            };
+
             return this;
         }
 
         public BoardBuilder WithTableauPiles()
         {
-            this.tableauPiles = SetupTableauPiles();
+            this.tableauPiles = new TableauPile[numberOfTableauPiles];
+
+            for (int i = 0; i < numberOfTableauPiles; i++)
+            {
+                this.tableauPiles[i] = new TableauPileBuilder()
+                    .WithPack(this.packOfCards)
+                    .WithCards(i + 1)
+                    .Build();
+            }
             return this;
         }
 
         public BoardBuilder WithStock()
         {
-            this.stock = SetupStock();
+            this.stock = new Stock(this.packOfCards);
             return this;
         }
 
@@ -41,37 +56,6 @@
                 TableauPiles = this.tableauPiles,
                 Stock = this.stock
             };
-        }
-
-        private FoundationPile[] SetupFoundationPiles()
-        {
-            return new[]
-            {
-                new FoundationPile(CardSuit.Diamonds),
-                new FoundationPile(CardSuit.Hearts),
-                new FoundationPile(CardSuit.Spades),
-                new FoundationPile(CardSuit.Clubs)
-            };
-        }
-
-        private TableauPile[] SetupTableauPiles()
-        {
-            var setupTableauPiles = new TableauPile[numberOfTableauPiles];
-
-            for (int i = 0; i < numberOfTableauPiles; i++)
-            {
-                setupTableauPiles[i] = new TableauPileBuilder()
-                    .WithPack(this.packOfCards)
-                    .WithCards(i + 1)
-                    .Build();
-            }
-
-            return setupTableauPiles;
-        }
-
-        private Stock SetupStock()
-        {
-            return new Stock(this.packOfCards);
         }
     }
 }

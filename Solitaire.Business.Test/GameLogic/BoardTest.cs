@@ -58,7 +58,7 @@ namespace Solitaire.Business.Test
         [Test]
         public void When_starting_game_Stock_should_have_24_cards()
         {
-            board.Stock.PackOfCards.GetNumberOfAvailableCards().Should().Be(24);
+            board.Stock.GetNumberOfFaceDownCards().Should().Be(24);
         }
     }
 }

@@ -5,7 +5,7 @@
     internal class Stock
     {
         private Stack<Card> faceDownCards;
-        private Stack<Card> faceUpCards;
+        private Stack<Card> faceUpCards = new Stack<Card>();
 
         public Stock(PackOfCards packOfCards)
         {
@@ -19,11 +19,16 @@
             this.faceUpCards.Push(topCard);
         }
 
-        public Card TopCard => this.faceUpCards.Peek();
+        public Card TopCard => 
+                    this.faceUpCards.Count == 0
+                        ? Card.EmptyCard
+                        : this.faceUpCards.Peek();
 
         public void RemoveTopCard()
         {
             this.faceUpCards.Pop();
         }
+
+        public int GetNumberOfFaceDownCards() => this.faceDownCards.Count;
     }
 }
