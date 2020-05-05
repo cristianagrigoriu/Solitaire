@@ -20,7 +20,7 @@ namespace Solitaire.Business.Test
         [Test]
         public void When_stock_is_newly_created_Should_have_same_number_of_cards_as_the_given_pack_of_cards()
         {
-            this.numberOfCardsInOriginalPackOfCards.Should().Be(this.stock.GetNumberOfFaceDownCards());
+            this.numberOfCardsInOriginalPackOfCards.Should().Be(this.stock.NumberOfFaceDownCards);
         }
 
         [Test]

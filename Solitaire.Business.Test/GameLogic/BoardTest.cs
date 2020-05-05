@@ -46,19 +46,19 @@ namespace Solitaire.Business.Test
         {
             board.TableauPiles.Should().HaveCount(7);
 
-            board.TableauPiles[0].Cards.Should().HaveCount(1);
-            board.TableauPiles[1].Cards.Should().HaveCount(2);
-            board.TableauPiles[2].Cards.Should().HaveCount(3);
-            board.TableauPiles[3].Cards.Should().HaveCount(4);
-            board.TableauPiles[4].Cards.Should().HaveCount(5);
-            board.TableauPiles[5].Cards.Should().HaveCount(6);
-            board.TableauPiles[6].Cards.Should().HaveCount(7);
+            board.TableauPiles[0].Count.Should().Be(1);
+            board.TableauPiles[1].Count.Should().Be(2);
+            board.TableauPiles[2].Count.Should().Be(3);
+            board.TableauPiles[3].Count.Should().Be(4);
+            board.TableauPiles[4].Count.Should().Be(5);
+            board.TableauPiles[5].Count.Should().Be(6);
+            board.TableauPiles[6].Count.Should().Be(7);
         }
 
         [Test]
         public void When_starting_game_Stock_should_have_24_cards()
         {
-            board.Stock.GetNumberOfFaceDownCards().Should().Be(24);
+            board.Stock.NumberOfFaceDownCards.Should().Be(24);
         }
     }
 }

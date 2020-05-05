@@ -29,6 +29,6 @@
             this.faceUpCards.Pop();
         }
 
-        public int GetNumberOfFaceDownCards() => this.faceDownCards.Count;
+        public int NumberOfFaceDownCards => this.faceDownCards.Count;
     }
 }

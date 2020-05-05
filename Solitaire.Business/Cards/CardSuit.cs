@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Solitaire.Business
+﻿namespace Solitaire.Business
 {
     public enum CardSuit
     {

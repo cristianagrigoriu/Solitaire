@@ -2,8 +2,6 @@
 
 namespace Solitaire.Business
 {
-    using System.Runtime.InteropServices.ComTypes;
-
     internal class FoundationPile
     {
         public FoundationPile(CardSuit cardSuit)
@@ -31,5 +29,7 @@ namespace Solitaire.Business
         {
             this.Cards.Push(card);
         }
+
+        public int Count => this.Cards.Count;
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Solitaire.Business
+﻿namespace Solitaire.Business
 {
     using System.Linq;
 
@@ -22,7 +20,7 @@ namespace Solitaire.Business
             }
         }
 
-        public void MoveCardFromTableauPileToFoundationPile(Card selectedCard, int tableauPileNumber)
+        public void MoveTopCardFromTableauPileToFoundationPile(int tableauPileNumber)
         {
             var tableauPile = this.TableauPiles[tableauPileNumber];
             var card = tableauPile.TopCard;
@@ -36,11 +34,14 @@ namespace Solitaire.Business
         }
 
         public void MoveCardFromTableauPileToAnotherTableauPile(
-            List<Card> selectedCards, 
-            int sourcePile, 
-            int destinationPile)
+            int numberOfCards, 
+            int sourcePileNumber, 
+            int destinationPileNumber)
         {
+            var sourcePile = this.TableauPiles[sourcePileNumber];
+            var destinationPile = this.TableauPiles[destinationPileNumber];
 
+            var cards = sourcePile.GetTopCards(numberOfCards);
         }
     }
 }

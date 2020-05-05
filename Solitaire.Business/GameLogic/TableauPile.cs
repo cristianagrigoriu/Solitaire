@@ -2,17 +2,18 @@
 
 namespace Solitaire.Business
 {
+    using System;
     using System.Linq;
 
     internal class TableauPile
     {
-        private Stack<Card> revealedCards = new Stack<Card>();
+        private Stack<Card> faceUpCards = new Stack<Card>();
 
-        public Stack<Card> Cards { get; set; } = new Stack<Card>();
+        public Stack<Card> FaceDownCards { get; set; } = new Stack<Card>();
 
-        public Card TopCard => this.Cards.Count == 0
+        public Card TopCard => this.FaceDownCards.Count == 0
             ? Card.EmptyCard
-            : this.Cards.Peek();
+            : this.FaceDownCards.Peek();
 
         public void RemoveTopCard()
         {
@@ -21,9 +22,9 @@ namespace Solitaire.Business
                 return;
             }
 
-            this.revealedCards.Pop();
+            this.faceUpCards.Pop();
 
-            if (!this.revealedCards.Any() && this.Cards.Any())
+            if (!this.faceUpCards.Any() && this.FaceDownCards.Any())
             {
                 this.RevealTopCard();
             }
@@ -31,7 +32,38 @@ namespace Solitaire.Business
 
         public void RevealTopCard()
         {
-            this.revealedCards.Push(this.Cards.Pop());
+            this.faceUpCards.Push(this.FaceDownCards.Pop());
+        }
+
+        public int Count => this.FaceDownCards.Count + this.faceUpCards.Count;
+
+        public Stack<Card> GetTopCards(int numberOfCards)
+        {
+            if (numberOfCards > this.faceUpCards.Count || this.Count == 0)
+            {
+                var emptyStack = new Stack<Card>();
+                emptyStack.Push(Card.EmptyCard);
+                return emptyStack;
+            }
+
+            var topCards = new Stack<Card>();
+            var allFaceUpCards = new Stack<Card>(this.faceUpCards);
+            //allFaceUpCards.Aggregate((x, y) => y.IsAfterComplementary(x));
+
+            for (int i = 0; i < numberOfCards; i++)
+            {
+                if (!topCards.TryPeek(out var formerTopCard))
+                {
+                    topCards.Push(formerTopCard);
+                }
+
+                //check if sequence
+
+                topCards.Push(allFaceUpCards.Pop());
+
+            }
+
+            return new Stack<Card>();
         }
     }
 }

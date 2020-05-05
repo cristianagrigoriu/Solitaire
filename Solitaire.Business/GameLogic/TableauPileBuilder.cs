@@ -27,7 +27,7 @@
         {
             for (int i = 0; i < this.cardsInPile; i++)
             {
-                this.tableauPile.Cards.Push(this.packOfCards.DrawNextCard());
+                this.tableauPile.FaceDownCards.Push(this.packOfCards.DrawNextCard());
             }
 
             this.tableauPile.RevealTopCard();

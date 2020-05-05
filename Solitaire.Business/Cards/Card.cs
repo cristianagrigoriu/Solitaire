@@ -6,6 +6,9 @@
         {
             this.Suit = suit;
             this.Number = number;
+            this.Colour = this.Suit == CardSuit.Clubs || this.Suit == CardSuit.Spades
+                ? CardColour.Black
+                : CardColour.Red;
         }
 
         public CardSuit Suit { get; }
@@ -13,6 +16,8 @@
         public CardNumber Number { get; }
 
         public static Card EmptyCard => new Card(0,0);
+
+        public CardColour Colour { get; }
 
         public override bool Equals(object obj)
         {
@@ -40,6 +45,12 @@
             }
 
             return this.Number == possibleNextCard.Number + 1;
+        }
+
+        public bool IsAfterComplementary(Card possibleNextCard)
+        {
+            return this.Colour != possibleNextCard.Colour
+                && this.Number == possibleNextCard.Number + 1;
         }
     }
 }
