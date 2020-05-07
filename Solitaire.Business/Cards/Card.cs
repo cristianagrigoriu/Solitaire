@@ -6,18 +6,18 @@
         {
             this.Suit = suit;
             this.Number = number;
-            this.Colour = this.Suit == CardSuit.Clubs || this.Suit == CardSuit.Spades
-                ? CardColour.Black
-                : CardColour.Red;
         }
 
         public CardSuit Suit { get; }
 
         public CardNumber Number { get; }
 
-        public static Card EmptyCard => new Card(0,0);
+        public CardColour Colour => 
+            this.Suit == CardSuit.Clubs || this.Suit == CardSuit.Spades
+                ? CardColour.Black
+                : CardColour.Red;
 
-        public CardColour Colour { get; }
+        public static Card EmptyCard => new Card(0, 0);
 
         public override bool Equals(object obj)
         {

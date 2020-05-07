@@ -2,12 +2,19 @@
 
 namespace Solitaire.Business
 {
+    using Solitaire.Business.GameLogic;
     using System;
     using System.Linq;
 
     internal class TableauPile
     {
-        private Stack<Card> faceUpCards = new Stack<Card>();
+        private TableauPileFaceUpCards faceUpCards = new TableauPileFaceUpCards();
+
+        public TableauPile(IEnumerable<Card> cards)
+        {
+            this.FaceDownCards = new Stack<Card>(cards);
+            this.RevealTopCard();
+        }
 
         public Stack<Card> FaceDownCards { get; set; } = new Stack<Card>();
 
@@ -32,7 +39,8 @@ namespace Solitaire.Business
 
         public void RevealTopCard()
         {
-            this.faceUpCards.Push(this.FaceDownCards.Pop());
+            //check if any face down cards
+            this.faceUpCards.Add(this.FaceDownCards.Pop());
         }
 
         public int Count => this.FaceDownCards.Count + this.faceUpCards.Count;
