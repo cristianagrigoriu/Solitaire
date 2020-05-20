@@ -41,7 +41,7 @@
             var sourcePile = this.TableauPiles[sourcePileNumber];
             var destinationPile = this.TableauPiles[destinationPileNumber];
 
-            var cards = sourcePile.GetTopCards(numberOfCards);
+            destinationPile.ReceiveCardsFrom(sourcePile, numberOfCards);
         }
     }
 }

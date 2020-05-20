@@ -16,6 +16,8 @@ namespace Solitaire.Business
             this.RevealTopCard();
         }
 
+        internal TableauPile() { }
+
         public Stack<Card> FaceDownCards { get; set; } = new Stack<Card>();
 
         public Card TopCard => this.FaceDownCards.Count == 0
@@ -29,9 +31,9 @@ namespace Solitaire.Business
                 return;
             }
 
-            this.faceUpCards.Pop();
+            this.faceUpCards.RemoveTopCard();
 
-            if (!this.faceUpCards.Any() && this.FaceDownCards.Any())
+            if (!this.faceUpCards.IsEmpty() && this.FaceDownCards.Any())
             {
                 this.RevealTopCard();
             }
@@ -45,33 +47,9 @@ namespace Solitaire.Business
 
         public int Count => this.FaceDownCards.Count + this.faceUpCards.Count;
 
-        public Stack<Card> GetTopCards(int numberOfCards)
+        public void ReceiveCardsFrom(TableauPile fromPile, int numberOfCards)
         {
-            if (numberOfCards > this.faceUpCards.Count || this.Count == 0)
-            {
-                var emptyStack = new Stack<Card>();
-                emptyStack.Push(Card.EmptyCard);
-                return emptyStack;
-            }
-
-            var topCards = new Stack<Card>();
-            var allFaceUpCards = new Stack<Card>(this.faceUpCards);
-            //allFaceUpCards.Aggregate((x, y) => y.IsAfterComplementary(x));
-
-            for (int i = 0; i < numberOfCards; i++)
-            {
-                if (!topCards.TryPeek(out var formerTopCard))
-                {
-                    topCards.Push(formerTopCard);
-                }
-
-                //check if sequence
-
-                topCards.Push(allFaceUpCards.Pop());
-
-            }
-
-            return new Stack<Card>();
+            fromPile.faceUpCards.ReceiveCardsFrom(fromPile.faceUpCards, numberOfCards);
         }
     }
 }

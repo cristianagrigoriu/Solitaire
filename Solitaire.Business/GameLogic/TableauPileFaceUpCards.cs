@@ -18,10 +18,22 @@ namespace Solitaire.Business.GameLogic
             }
         }
 
+        public int Count => this.faceUpCards.Count;
+
         public void Add(Card card)
         {
             //ToDo check if list empty
             this.faceUpCards.Add(card);
+        }
+
+        public void RemoveTopCard()
+        {
+            this.faceUpCards.RemoveAt(this.faceUpCards.Count - 1);
+        }
+
+        public bool IsEmpty()
+        {
+            return this.faceUpCards.Count == 0;
         }
 
         private IEnumerable<Card> GetCards(int numberOfCards) //test if number of cards bigger than list count
@@ -32,7 +44,7 @@ namespace Solitaire.Business.GameLogic
         private bool CanAddPileOfCards(IEnumerable<Card> pileOfCards)
         {
             //ToDo if destination pile empty, check if King
-            var currentTopCard = this.faceUpCards.Last();
+            var currentTopCard = this.faceUpCards.Last(); //current top card e cartea cea mai de jos din pile
             return currentTopCard.IsAfterComplementary(pileOfCards.First());
         }
 
