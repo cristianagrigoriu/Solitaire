@@ -20,13 +20,15 @@ namespace Solitaire.Business
 
         public Stack<Card> FaceDownCards { get; set; } = new Stack<Card>();
 
-        public Card TopCard => this.FaceDownCards.Count == 0
+        public Card TopFaceDownCard => this.FaceDownCards.Count == 0 //ToDo maybe should reconsider name
             ? Card.EmptyCard
             : this.FaceDownCards.Peek();
 
+        //ToDo these are not top cards, they are the accessible cards, the ones you can touch
+
         public void RemoveTopCard()
         {
-            if (Equals(this.TopCard, Card.EmptyCard))
+            if (Equals(this.TopFaceDownCard, Card.EmptyCard))
             {
                 return;
             }
@@ -42,6 +44,7 @@ namespace Solitaire.Business
         public void RevealTopCard()
         {
             //check if any face down cards
+            
             this.faceUpCards.Add(this.FaceDownCards.Pop());
         }
 

@@ -23,7 +23,7 @@
         public void MoveTopCardFromTableauPileToFoundationPile(int tableauPileNumber)
         {
             var tableauPile = this.TableauPiles[tableauPileNumber];
-            var card = tableauPile.TopCard;
+            var card = tableauPile.TopFaceDownCard;
 
             var possibleFoundationPile = this.FoundationPiles.First(x => x.Suit == card.Suit);
             if (possibleFoundationPile.CanAdd(card))
