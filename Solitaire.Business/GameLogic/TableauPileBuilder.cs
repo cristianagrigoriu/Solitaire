@@ -1,15 +1,12 @@
-﻿namespace Solitaire.Business
+﻿using System.Collections.Generic;
+
+namespace Solitaire.Business
 {
     internal class TableauPileBuilder
     {
-        private readonly TableauPile tableauPile;
+        private TableauPile tableauPile;
         private PackOfCards packOfCards;
         private int cardsInPile;
-
-        public TableauPileBuilder()
-        {
-            this.tableauPile = new TableauPile();
-        }
 
         public TableauPileBuilder WithPack(PackOfCards packOfCards)
         {
@@ -25,12 +22,14 @@
 
         public TableauPile Build()
         {
+            var cardsForPile = new List<Card>();
+
             for (int i = 0; i < this.cardsInPile; i++)
             {
-                this.tableauPile.FaceDownCards.Push(this.packOfCards.DrawNextCard());
+                cardsForPile.Add(this.packOfCards.DrawNextCard());
             }
 
-            this.tableauPile.RevealTopCard();
+            this.tableauPile = new TableauPile(cardsForPile);
 
             return this.tableauPile;
         }

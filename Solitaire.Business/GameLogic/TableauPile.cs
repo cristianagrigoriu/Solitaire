@@ -13,39 +13,38 @@ namespace Solitaire.Business
         public TableauPile(IEnumerable<Card> cards)
         {
             this.FaceDownCards = new Stack<Card>(cards);
-            this.RevealTopCard();
+            this.TurnCardFaceUp();
         }
 
         internal TableauPile() { }
 
         public Stack<Card> FaceDownCards { get; set; } = new Stack<Card>();
 
-        public Card TopFaceDownCard => this.FaceDownCards.Count == 0 //ToDo maybe should reconsider name
+        //should not be possible to have empty face up card and still some face down cards
+        public Card TopFaceUpCard => 
+            this.faceUpCards.Count == 0 
             ? Card.EmptyCard
-            : this.FaceDownCards.Peek();
+            : this.faceUpCards.TopCard;
+
+        public bool CanAddPileOfCards(IEnumerable<Card> pileOfCards)
+            => this.faceUpCards.CanAddPileOfCards(pileOfCards);
 
         //ToDo these are not top cards, they are the accessible cards, the ones you can touch
 
+        //ToDO should return removed card?
         public void RemoveTopCard()
         {
-            if (Equals(this.TopFaceDownCard, Card.EmptyCard))
+            if (Equals(this.TopFaceUpCard, Card.EmptyCard))
             {
                 return;
             }
 
             this.faceUpCards.RemoveTopCard();
 
-            if (!this.faceUpCards.IsEmpty() && this.FaceDownCards.Any())
+            if (this.faceUpCards.IsEmpty() && this.FaceDownCards.Any())
             {
-                this.RevealTopCard();
+                this.TurnCardFaceUp();
             }
-        }
-
-        public void RevealTopCard()
-        {
-            //check if any face down cards
-            
-            this.faceUpCards.Add(this.FaceDownCards.Pop());
         }
 
         public int Count => this.FaceDownCards.Count + this.faceUpCards.Count;
@@ -53,6 +52,14 @@ namespace Solitaire.Business
         public void ReceiveCardsFrom(TableauPile fromPile, int numberOfCards)
         {
             fromPile.faceUpCards.ReceiveCardsFrom(fromPile.faceUpCards, numberOfCards);
+        }
+
+        private void TurnCardFaceUp()
+        {
+            if (this.FaceDownCards.Any())
+            {
+                this.faceUpCards.Add(this.FaceDownCards.Pop());
+            }
         }
     }
 }
