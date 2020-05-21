@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
+using Solitaire.Business.GameLogic;
+using System;
+using System.Linq;
 
 namespace Solitaire.Business
 {
-    using Solitaire.Business.GameLogic;
-    using System;
-    using System.Linq;
-
     internal class TableauPile
     {
         private TableauPileFaceUpCards faceUpCards = new TableauPileFaceUpCards();
